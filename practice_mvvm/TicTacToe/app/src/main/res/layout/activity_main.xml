@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View" />
+        <variable name="viewModel" type="com.miraclehwan.tictactoe.viewmodel.TIcTacToeViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:columnCount="3"
+            android:rowCount="3">
+
+            <TextView
+                style="@style/textView_main_gameButton"
+                android:text='@{viewModel.cells["00"]}'
+                android:onClick='@{() -> viewModel.onClickedCellAt(0,0)}'/>
+
+            <TextView
+                style="@style/textView_main_gameButton"
+                android:text='@{viewModel.cells["01"]}'
+                android:onClick='@{() -> viewModel.onClickedCellAt(0,1)}'/>
+
+            <TextView
+                style="@style/textView_main_gameButton"
+                android:text='@{viewModel.cells["02"]}'
+                android:onClick='@{() -> viewModel.onClickedCellAt(0,2)}'/>
+
+            <TextView
+                style="@style/textView_main_gameButton"
+                android:text='@{viewModel.cells["10"]}'
+                android:onClick='@{() -> viewModel.onClickedCellAt(1,0)}'/>
+
+            <TextView
+                style="@style/textView_main_gameButton"
+                android:text='@{viewModel.cells["11"]}'
+                android:onClick='@{() -> viewModel.onClickedCellAt(1,1)}'/>
+
+            <TextView
+                style="@style/textView_main_gameButton"
+                android:text='@{viewModel.cells["12"]}'
+                android:onClick='@{() -> viewModel.onClickedCellAt(1,2)}'/>
+
+            <TextView
+                style="@style/textView_main_gameButton"
+                android:text='@{viewModel.cells["20"]}'
+                android:onClick='@{() -> viewModel.onClickedCellAt(2,0)}'/>
+
+            <TextView
+                style="@style/textView_main_gameButton"
+                android:text='@{viewModel.cells["21"]}'
+                android:onClick='@{() -> viewModel.onClickedCellAt(2,1)}'/>
+
+            <TextView
+                style="@style/textView_main_gameButton"
+                android:text='@{viewModel.cells["22"]}'
+                android:onClick='@{() -> viewModel.onClickedCellAt(2,2)}'/>
+
+        </GridLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility='@{viewModel.winnner != null ? View.VISIBLE : View.GONE}'
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:textSize="40dp"
+                android:text='@{viewModel.winnner}'/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:textSize="40dp"
+                android:text='Winner' />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>
