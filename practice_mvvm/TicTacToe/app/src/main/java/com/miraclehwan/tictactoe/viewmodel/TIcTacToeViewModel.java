@@ -24,7 +24,7 @@ public class TIcTacToeViewModel{
     }
 
     public void onClickedCellAt(int row, int col){
-        if (!model.isCheck(row, col) && !model.isFinish()){
+        if (!model.isCheck(row, col) && model.getWinner() == null){
             Player playerThatMoved = model.mark(row, col);
             cells.put("" + row + col, playerThatMoved.toString());
             winnner.set(model.getWinner() == null ? null : model.getWinner().toString());

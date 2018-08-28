@@ -44,14 +44,6 @@ public class Board {
         return playerThatMoved;
     }
 
-    public boolean isFinish(){
-        if (state == GameState.FINISHED){
-            return true;
-        }else{
-            return false;
-        }
-    }
-
     public boolean isCheck(int row, int col){
         if (cells[row][col].getValue() != null){
             return true;
