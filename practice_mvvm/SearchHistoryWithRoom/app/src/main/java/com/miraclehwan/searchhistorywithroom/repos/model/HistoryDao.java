@@ -11,7 +11,7 @@ import java.util.List;
 @Dao
 public interface HistoryDao {
 
-    @Query("SELECT * FROM search_table ORDER BY date DESC")
+    @Query("SELECT * FROM search_table ORDER BY date DESC LIMIT 20")
     LiveData<List<History>> getHistoryList();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

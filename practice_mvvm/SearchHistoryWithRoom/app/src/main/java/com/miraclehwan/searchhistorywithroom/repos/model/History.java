@@ -33,4 +33,13 @@ public class History {
     public void setContent(@NonNull String content) {
         this.content = content;
     }
+
+    public void setDate(@NonNull String date) {
+        this.date = date;
+    }
+
+    @NonNull
+    public String getDate() {
+        return date;
+    }
 }
