@@ -15,13 +15,15 @@ import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
 
-    ActivityMainBinding binding;
+    private ActivityMainBinding binding;
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,12 @@ public class MainActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
         networkRxJava();
+    }
+
+    @Override
+    protected void onDestroy() {
+        compositeDisposable.dispose();
+        super.onDestroy();
     }
 
     private void simpleRxJava(){
@@ -63,13 +71,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void networkRxJava(){
-        RetrofitClient.getInstance().getApi()
+        compositeDisposable.add(RetrofitClient.getInstance().getApi()
                 .getUserList()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         user -> binding.tvText.setText(user.toString()),
                         throwable -> Toast.makeText(this, "Error!!!!\n=>" + throwable.toString(), Toast.LENGTH_SHORT).show()
-                );
+                ));
     }
 }
