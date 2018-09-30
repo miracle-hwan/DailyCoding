@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Function;
@@ -56,8 +57,8 @@ public class MapActivity extends BaseActivity {
                             for (User user : users) {
                                 binding.tvResult.append(user.toString());
                                 binding.tvResult.append("\n");
-                            }
-                        }, throwable -> Toast.makeText(this, "Error : " + throwable.getMessage(), Toast.LENGTH_SHORT).show(),
+                            }},
+                        throwable -> Toast.makeText(this, "Error : " + throwable.getMessage(), Toast.LENGTH_SHORT).show(),
                         () -> Toast.makeText(this, "onComplete", Toast.LENGTH_SHORT).show());
     }
 
@@ -83,8 +84,8 @@ public class MapActivity extends BaseActivity {
                     for (ApiUser apiUser : apiUsers){
                         binding.tvResult.append(apiUser.toString());
                         binding.tvResult.append("\n");
-                    }
-                }, throwable -> Toast.makeText(this, "Error : " + throwable.getMessage(), Toast.LENGTH_SHORT).show(),
+                    }},
+                        throwable -> Toast.makeText(this, "Error : " + throwable.getMessage(), Toast.LENGTH_SHORT).show(),
                         () -> Toast.makeText(this, "onComplete", Toast.LENGTH_SHORT).show());
     }
 }
