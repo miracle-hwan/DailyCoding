@@ -27,3 +27,33 @@ Operator
 
 4. flatMap with filter, zip : 여러번 해봐야 익숙해 질듯
 ```
+
+```
+Subject
+
+1. PublishSubject : 구독한 시점 이후로 오는 데이터만 받음
+
+2. ReplaySubject : 구독한 시점 이전의 모든데이터를 받음
+
+3. BehaviorSubject : 구독한 시점 이전의 최신데이터를 받음 -> livedata랑 비슷함
+
+4. AsyncSubject : 구독시점과 상관없이 onComplete()가 호출되었을 때 최신데이터를받음.
+  -> onComplete()가 호출되지 않았다면 데이터를 하나도 받을 수 없음
+```
+
+```
+CompositeDisposable : 메모리 릭을 방지하기 위한 구독해제
+
+ 1. clear() : add로 추가한 옵저버블을 모두 구독해제, 새로 추가 가능
+ 2. dispose() : add로 추가한 옵저버블을 모두 구독해제, 새로 추가 불가능
+
+ #single의 경우 자동으로 dispose됌. retrofit api에서 사용하였음
+```
+
+```
+Backpressure
+
+Backpressure : 2.x부터는 Observable 말고 Flowable 사용해야 함.
+ -> 많은 양의 데이터(1만or10만)를 흘려보낼 때 사용함
+ # 앱개발하면서 배압이 필요할 상황이 있을까 의문... 어차피 안써보면 까먹으니 나중에 필요한 상황이 오면 연습해서 적용할 예정
+```

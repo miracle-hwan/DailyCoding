@@ -5,16 +5,14 @@ import android.support.annotation.Nullable;
 import android.util.Pair;
 import android.widget.Toast;
 
-import com.miraclehwan.rxjava2.operator.BaseActivity;
+import com.miraclehwan.rxjava2.BaseActivity;
 import com.miraclehwan.rxjava2.operator.zip.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.BiFunction;
 import io.reactivex.schedulers.Schedulers;
 
 public class FlatmapWithZipActivity extends BaseActivity {

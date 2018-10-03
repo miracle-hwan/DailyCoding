@@ -1,4 +1,4 @@
-package com.miraclehwan.rxjava2.operator;
+package com.miraclehwan.rxjava2;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
