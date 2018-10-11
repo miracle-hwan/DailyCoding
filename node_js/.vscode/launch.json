@@ -8,7 +8,7 @@
             "type": "node",
             "request": "launch",
             "name": "프로그램 시작",
-            "program": "${workspaceFolder}/ch04/test1.js",
+            "program": "${workspaceFolder}/ch04/test4.js",
             "args": [
                 "this is third parameter"
             ]
