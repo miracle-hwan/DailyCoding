@@ -1,8 +1,9 @@
 package com.miraclehwan.coroutinetest
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.*
+import kotlin.system.measureNanoTime
 
 class MainActivity : AppCompatActivity() {
 
@@ -11,13 +12,84 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-        test9()
+        test14()
         Log.e("Main End")
+    }
+
+    fun test14() = runBlocking {
+        val time = measureNanoTime {
+            val one = async(start = CoroutineStart.LAZY) { doSomethingUsefulOne() }
+            val two = async(start = CoroutineStart.LAZY) { doSomethingUsefulTwo() }
+            Log.e("The answer is ${one.await() + two.await()}")
+        }
+        Log.e("Completed in ${time} ms")
+    }
+
+    fun test13() = runBlocking {
+        val time = measureNanoTime {
+            val one = async { doSomethingUsefulOne() }
+            val two = async { doSomethingUsefulTwo() }
+            Log.e("The answer is ${one.await() + two.await()}")
+        }
+        Log.e("Completed in ${time} ms")
+    }
+
+    suspend fun doSomethingUsefulOne():Int {
+        delay(1000L)
+        return 13
+    }
+
+    suspend fun doSomethingUsefulTwo():Int {
+        delay(1000L)
+        return 29
+    }
+
+    fun test12() = runBlocking {
+        val result = withTimeoutOrNull(1000L){
+            repeat(1){
+                Log.e("I'm sleeping ${it} ...")
+                delay(500L)
+            }
+            "Done"
+        }
+        Log.e("Result is ${result}")
+    }
+
+    fun test11() = runBlocking {
+        val startTime = System.currentTimeMillis()
+        val job = launch(Dispatchers.Default) {
+            var nextPrintTime = startTime
+            var i = 0;
+            while (isActive) {
+                if (System.currentTimeMillis() >= nextPrintTime) {
+                    Log.e("job: I'm sleeping ${i++} ...")
+                    nextPrintTime += 500L
+                }
+            }
+        }
+        delay(1300L)
+        Log.e("main: I'm tried of waiting!")
+        job.cancelAndJoin()
+        Log.e("main: Now I can quit")
+    }
+
+    fun test10() = runBlocking {
+        val job = launch {
+            repeat(1000) {
+                Log.e("job : I'm sleeping ${it} ...")
+                delay(500L)
+            }
+        }
+        delay(1300L)
+        Log.e("main : I'm tried of waiting!")
+        job.cancel()
+        job.join()
+        Log.e("main: Now I can quit")
     }
 
     fun test9() = runBlocking {
         GlobalScope.launch {
-            repeat(100){i ->
+            repeat(100) { i ->
                 Log.e("I'm sleeping ${i}")
                 delay(500L)
             }
@@ -27,7 +99,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun test8() = runBlocking {
-        repeat(100_000){
+        repeat(100_000) {
             launch {
                 delay(10000L)
                 Log.e(".")
@@ -41,7 +113,7 @@ class MainActivity : AppCompatActivity() {
         Log.e("Test7 End")
     }
 
-    suspend fun doWorld(){
+    suspend fun doWorld() {
         delay(1000L)
         Log.e("World!")
     }
@@ -87,7 +159,7 @@ class MainActivity : AppCompatActivity() {
         Log.e("Function End")
     }
 
-    fun test3() = runBlocking{
+    fun test3() = runBlocking {
         GlobalScope.launch {
             delay(1000L)
             Log.e("World!")
@@ -96,7 +168,7 @@ class MainActivity : AppCompatActivity() {
         delay(2000L)
     }
 
-    fun test2(){
+    fun test2() {
         GlobalScope.launch {
             delay(1000L)
             Log.e("World!")
@@ -107,7 +179,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun test(){
+    fun test() {
         GlobalScope.launch {
             delay(1000L)
             Log.e("First Coroutine !!!");
