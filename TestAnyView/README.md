@@ -6,8 +6,8 @@ Test all about View
 History
 --------
 
-1. 20190804
-```
-ListView Item Click ( actuallyi don't use it to my app. just test for private )
-MotionLayout Start ( i think i found awesome layout )
-```
+#### 2019-08-04
+
+1. ListView Item Click ( actually i don't use it to my app. just test for private )
+2. MotionLayout( i think i found awesome layout )
+
