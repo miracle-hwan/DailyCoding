@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:app="http://schemas.android.com/apk/res-auto"
+>
+    <Transition
+            app:constraintSetStart="@layout/motion_01_cl_start"
+            app:constraintSetEnd="@layout/motion_01_cl_end"
+            app:duration="1000">
+
+        <OnClick
+                app:targetId="@+id/ml_parent"
+                app:clickAction="toggle"/>
+
+        <!--<OnSwipe-->
+        <!--app:touchAnchorId="@+id/v_test"-->
+        <!--app:touchAnchorSide="right"-->
+        <!--app:dragDirection="dragRight"/>-->
+
+        <KeyFrameSet>
+            <KeyPosition
+                    app:keyPositionType="pathRelative"
+                    app:percentY="-0.50"
+                    app:percentX="0.75"
+                    app:framePosition="25"
+                    app:motionTarget="@+id/v_test"/>
+
+            <KeyPosition
+                    app:keyPositionType="pathRelative"
+                    app:percentY="-0.70"
+                    app:framePosition="50"
+                    app:motionTarget="@+id/v_test"/>
+
+            <KeyPosition
+                    app:keyPositionType="pathRelative"
+                    app:percentY="-0.50"
+                    app:percentX="0.25"
+                    app:framePosition="75"
+                    app:motionTarget="@+id/v_test"/>
+        </KeyFrameSet>
+
+    </Transition>
+</MotionScene>
