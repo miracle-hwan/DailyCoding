@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:app="http://schemas.android.com/apk/res-auto">
+    <Transition
+            app:constraintSetStart="@layout/my_motion_map_start"
+            app:constraintSetEnd="@layout/my_motion_map_end"
+            app:duration="1000">
+
+        <!--<OnClick-->
+                <!--app:targetId="@+id/tv_background"-->
+                <!--app:clickAction="toggle"/>-->
+
+        <OnSwipe
+                app:touchAnchorId="@+id/tv_left"
+                app:touchAnchorSide="right"
+                app:dragDirection="dragRight" />
+
+    </Transition>
+</MotionScene>

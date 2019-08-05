@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/cl_parenct"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <TextView
+            android:id="@+id/tv_left"
+            android:layout_width="200dp"
+            android:layout_height="0dp"
+            android:text="Slide Left Text View"
+            android:textSize="30dp"
+            android:background="#80FF0000"
+            android:gravity="center"
+            app:layout_constraintRight_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_top"
+            app:layout_constraintBottom_toTopOf="@+id/tv_bottom"/>
+
+    <TextView
+            android:id="@+id/tv_right"
+            android:layout_width="100dp"
+            android:layout_height="0dp"
+            android:text="Slide Right Text View"
+            android:textSize="30dp"
+            android:background="#800000FF"
+            android:gravity="center"
+            app:layout_constraintLeft_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_top"
+            app:layout_constraintBottom_toTopOf="@+id/tv_bottom"/>
+
+    <TextView
+            android:id="@+id/tv_top"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Slide Top Text View"
+            android:textSize="30dp"
+            android:background="#8000FF00"
+            android:gravity="center"
+            app:layout_constraintLeft_toRightOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toTopOf="parent"/>
+
+    <TextView
+            android:id="@+id/tv_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Slide Top Text View"
+            android:textSize="30dp"
+            android:background="#80FFFF00"
+            android:gravity="center"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
