@@ -5,8 +5,8 @@ This repository is record all about my daily coding
 **This repository has a lot of wrong codes.**
 
 
-Perpuse
+Purpose
 --------
-1. practice new library
-2. practice design patten
-3. write code what i wonder
+1. practice library
+2. write code what i wonder
+3. practice design patten
