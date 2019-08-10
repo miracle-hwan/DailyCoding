@@ -1,73 +1,37 @@
 package com.miraclehwan.dagger2_test;
 
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.widget.TextView;
-
+import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import com.miraclehwan.dagger2_test.data.DataManager;
-import com.miraclehwan.dagger2_test.data.model.User;
-import com.miraclehwan.dagger2_test.di.component.ActivityComponent;
-import com.miraclehwan.dagger2_test.di.component.DaggerActivityComponent;
-import com.miraclehwan.dagger2_test.di.module.ActivityModule;
+import com.miraclehwan.dagger2_test.di.DaggerMyComponent;
+import com.miraclehwan.dagger2_test.di.MyComponent;
+import com.miraclehwan.dagger2_test.model.Kitchen;
 
 import javax.inject.Inject;
 
 public class MainActivity extends AppCompatActivity {
 
     @Inject
-    DataManager mDataManager;
-
-    private ActivityComponent activityComponent;
-
-    private TextView mTvUserInfo;
-    private TextView mTvAccessToken;
-
-    public ActivityComponent getActivityComponent() {
-        if (activityComponent == null) {
-            activityComponent = DaggerActivityComponent.builder()
-                    .activityModule(new ActivityModule(this))
-                    .applicationComponent(DemoApplication.get(this).getComponent())
-                    .build();
-        }
-        return activityComponent;
-    }
+    Kitchen mKitchen;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getActivityComponent().inject(this);
+        MyComponent myComponent = DaggerMyComponent.create();
+        myComponent.inject(this);
 
-        mTvUserInfo = (TextView) findViewById(R.id.tv_user_info);
-        mTvAccessToken = (TextView) findViewById(R.id.tv_access_token);
+        isOrder();
     }
 
-    @Override
-    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        createUser();
-        getUser();
-        mDataManager.saveAccessToken("ASDR12443JFDJF43543J543H3K543");
-
-        String token = mDataManager.getAccessToken();
-        if(token != null){
-            mTvAccessToken.setText(token);
+    private void isOrder() {
+        boolean isOrder = mKitchen.isOrder();
+        if (isOrder) {
+            Log.e("isOrder", "order successful");
+        } else {
+            Log.e("isOrder", "order failed");
         }
-    }
-
-    private void createUser(){
-        try {
-            mDataManager.createUser(new User(1L, "Ali", "1367, Gurgaon, Haryana, India", "2009", "2010"));
-        }catch (Exception e){e.printStackTrace();}
-    }
-
-    private void getUser(){
-        try {
-            User user = mDataManager.getUser(1L);
-            mTvUserInfo.setText(user.toString());
-        }catch (Exception e){e.printStackTrace();}
     }
 }
