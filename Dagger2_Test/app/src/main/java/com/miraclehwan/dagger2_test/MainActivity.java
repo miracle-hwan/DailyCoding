@@ -1,73 +1,43 @@
 package com.miraclehwan.dagger2_test;
 
-import android.content.res.Resources;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import com.miraclehwan.dagger2_test.data.DataManager;
-import com.miraclehwan.dagger2_test.data.model.User;
-import com.miraclehwan.dagger2_test.di.component.ActivityComponent;
-import com.miraclehwan.dagger2_test.di.component.DaggerActivityComponent;
-import com.miraclehwan.dagger2_test.di.module.ActivityModule;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 public class MainActivity extends AppCompatActivity {
 
     @Inject
-    DataManager mDataManager;
+    @Named("default")
+    SharedPreferences mDefaultSharedPrefs;
 
-    private ActivityComponent activityComponent;
-
-    private TextView mTvUserInfo;
-    private TextView mTvAccessToken;
-
-    public ActivityComponent getActivityComponent() {
-        if (activityComponent == null) {
-            activityComponent = DaggerActivityComponent.builder()
-                    .activityModule(new ActivityModule(this))
-                    .applicationComponent(DemoApplication.get(this).getComponent())
-                    .build();
-        }
-        return activityComponent;
-    }
+    @Inject
+    @Named("secret")
+    SharedPreferences mSecretSharedPrefs;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getActivityComponent().inject(this);
+        ((DemoApplication) getApplication())
+                .getApplicationComponent()
+                .inject(this);
 
-        mTvUserInfo = (TextView) findViewById(R.id.tv_user_info);
-        mTvAccessToken = (TextView) findViewById(R.id.tv_access_token);
-    }
+        mDefaultSharedPrefs.edit()
+                .putString("status", "DefaultPref is success!")
+                .apply();
 
-    @Override
-    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        createUser();
-        getUser();
-        mDataManager.saveAccessToken("ASDR12443JFDJF43543J543H3K543");
+        ((TextView) findViewById(R.id.tv_user_info)).setText(mDefaultSharedPrefs.getString("status", "null"));
 
-        String token = mDataManager.getAccessToken();
-        if(token != null){
-            mTvAccessToken.setText(token);
-        }
-    }
+        mSecretSharedPrefs.edit()
+                .putString("status", "SecretPref is success!")
+                .apply();
 
-    private void createUser(){
-        try {
-            mDataManager.createUser(new User(1L, "Ali", "1367, Gurgaon, Haryana, India", "2009", "2010"));
-        }catch (Exception e){e.printStackTrace();}
-    }
-
-    private void getUser(){
-        try {
-            User user = mDataManager.getUser(1L);
-            mTvUserInfo.setText(user.toString());
-        }catch (Exception e){e.printStackTrace();}
+        ((TextView) findViewById(R.id.tv_access_token)).setText(mSecretSharedPrefs.getString("status", "null"));
     }
 }
