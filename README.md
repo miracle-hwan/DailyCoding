@@ -1,9 +1,12 @@
-﻿## DailyCoding
-#### 매일하는 코딩을 기록하는 저장소입니다. ( 틀린 내용 매우 많으니 주의 )
+DailyCoding
+========
+This repository is record all about my daily coding
 
-```
-1. 새로운 라이브러리 연습  
-2. 궁금한 기능 구현  
-3. 디자인 패턴 및 테스트 연습용  
-```
+**This repository has a lot of wrong codes.**
 
+
+Purpose
+--------
+1. practice library
+2. write code what i wonder
+3. practice design patten
