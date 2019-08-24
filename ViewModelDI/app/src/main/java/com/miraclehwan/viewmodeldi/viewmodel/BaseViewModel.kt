@@ -15,6 +15,9 @@ open class BaseViewModel : ViewModel() {
         when (this) {
             is BusViewModel -> mInjector.inject(this)
             is SubwayViewModel -> mInjector.inject(this)
+            is MainViewModel -> {
+                mInjector.inject(this)
+            }
         }
     }
 }
