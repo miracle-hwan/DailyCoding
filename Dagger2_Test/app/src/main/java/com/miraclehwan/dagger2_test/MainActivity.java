@@ -41,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
 
         getActivityComponent().inject(this);
 
-        mTvUserInfo = (TextView) findViewById(R.id.tv_user_info);
-        mTvAccessToken = (TextView) findViewById(R.id.tv_access_token);
+//        mTvUserInfo = (TextView) findViewById(R.id.tv_user_info);
+//        mTvAccessToken = (TextView) findViewById(R.id.tv_access_token);
     }
 
     @Override

@@ -9,7 +9,7 @@ import com.miraclehwan.dagger2_test.di.module.ApplicationModule;
 
 import javax.inject.Inject;
 
-public class DemoApplication extends Application {
+public class    DemoApplication extends Application {
 
     ApplicationComponent applicationComponent;
 
