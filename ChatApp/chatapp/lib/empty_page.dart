@@ -1,4 +1,6 @@
+import 'package:chatapp/provider/page_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class EmptyPage extends Page {
   static final pageName = "EmptyPage";
@@ -18,8 +20,16 @@ class EmptyPageWidget extends StatefulWidget {
 class _EmptyPageWidgetState extends State<EmptyPageWidget> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.amber,
+    return Material(
+      child: InkWell(
+        onTap: (){
+          Provider.of<PageNotifier>(context, listen: false)
+              .goToChat();
+        },
+        child: Container(
+          color: Colors.amber,
+        ),
+      ),
     );
   }
 }

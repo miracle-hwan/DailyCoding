@@ -1,5 +1,8 @@
 import 'package:chatapp/chat_message.dart';
+import 'package:chatapp/empty_page.dart';
+import 'package:chatapp/provider/page_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   static final String pageName = "HomePage";
@@ -19,6 +22,14 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("MiracleChat"),
+        actions: [
+          IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () {
+                Provider.of<PageNotifier>(context, listen: false)
+                    .goToOtherPage(EmptyPage.pageName);
+              })
+        ],
       ),
       body: Column(
         children: [
@@ -55,7 +66,10 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildItem(context, index, animation) {
-    return ChatMessage(_chatMessages[index], animation: animation,);
+    return ChatMessage(
+      _chatMessages[index],
+      animation: animation,
+    );
   }
 
   void _handleSubmitted(String text) {
