@@ -2,6 +2,7 @@ package com.miraclehwan.paging
 
 import android.util.Log
 import androidx.paging.PagingSource
+import androidx.paging.PagingState
 import com.miraclehwan.paging.response.Item
 
 class StackExchangeDataSource : PagingSource<Int, Item>() {
@@ -38,5 +39,9 @@ class StackExchangeDataSource : PagingSource<Int, Item>() {
             Log.e("daehwan", "${e.message}")
             return LoadResult.Error(e)
         }
+    }
+
+    override fun getRefreshKey(state: PagingState<Int, Item>): Int? {
+        return state.anchorPosition
     }
 }

@@ -2,6 +2,7 @@ package com.miraclehwan.github
 
 import android.util.Log
 import androidx.paging.PagingSource
+import androidx.paging.PagingState
 import com.miraclehwan.github.response.Item
 
 class GithubDataSource : PagingSource<Int, Item>() {
@@ -36,5 +37,9 @@ class GithubDataSource : PagingSource<Int, Item>() {
             Log.e("daehwan", "${e.message}")
             return LoadResult.Error(e)
         }
+    }
+
+    override fun getRefreshKey(state: PagingState<Int, Item>): Int? {
+        return state.anchorPosition
     }
 }

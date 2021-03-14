@@ -2,6 +2,7 @@ package com.miraclehwan.paging.test
 
 import android.util.Log
 import androidx.paging.PagingSource
+import androidx.paging.PagingState
 import com.miraclehwan.paging.test.Api
 import com.miraclehwan.paging.test.response.Data
 
@@ -29,4 +30,7 @@ class PostDataSource() : PagingSource<Int, Data>() {
         }
     }
 
+    override fun getRefreshKey(state: PagingState<Int, Data>): Int? {
+        return state.anchorPosition
+    }
 }

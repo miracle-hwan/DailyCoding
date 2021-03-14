@@ -2,6 +2,7 @@ package com.miraclehwan.github
 
 import com.miraclehwan.github.Constant.API_TOKEN
 import com.miraclehwan.github.response.GithubResponse
+import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -47,4 +48,10 @@ interface GithubApi {
         @Query("page") page: Int,
         @Query("q") text: String = "android"
     ): Response<GithubResponse>
+
+    @GET("search/repositories")
+    fun getRxRepos(
+        @Query("page") page: Int,
+        @Query("q") text: String = "android"
+    ): Single<GithubResponse>
 }
